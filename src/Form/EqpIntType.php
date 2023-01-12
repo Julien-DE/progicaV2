@@ -13,7 +13,7 @@ class EqpIntType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('gite')
+            
         ;
     }
 

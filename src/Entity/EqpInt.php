@@ -66,4 +66,8 @@ class EqpInt
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

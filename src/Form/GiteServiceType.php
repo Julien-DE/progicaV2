@@ -14,7 +14,7 @@ class GiteServiceType extends AbstractType
         $builder
             ->add('price')
             ->add('service')
-            ->add('gite')
+            
         ;
     }
 
