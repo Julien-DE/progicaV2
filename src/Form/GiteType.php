@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Gite;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,6 +33,11 @@ class GiteType extends AbstractType
             ->add('updateAt')
             ->add('eqpInts')
             ->add('eqpExts')
+            ->add('giteServices',CollectionType::class,[
+                'allow_add' => true,
+                'entry_type'=> GiteServiceType::class,
+                
+            ])
         ;
     }
 
