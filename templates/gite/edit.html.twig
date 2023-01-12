@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Gite{% endblock %}
+
+{% block body %}
+    <h1>Edit Gite</h1>
+
+    {{ include('gite/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_gite_index') }}">back to list</a>
+
+    {{ include('gite/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit GiteService{% endblock %}
+
+{% block body %}
+    <h1>Edit GiteService</h1>
+
+    {{ include('gite_service/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_gite_service_index') }}">back to list</a>
+
+    {{ include('gite_service/_delete_form.html.twig') }}
+{% endblock %}

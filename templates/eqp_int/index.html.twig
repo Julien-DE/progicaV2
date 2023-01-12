@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EqpInt index{% endblock %}
+
+{% block body %}
+    <h1>EqpInt index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for eqp_int in eqp_ints %}
+            <tr>
+                <td>{{ eqp_int.id }}</td>
+                <td>{{ eqp_int.name }}</td>
+                <td>
+                    <a href="{{ path('app_eqp_int_show', {'id': eqp_int.id}) }}">show</a>
+                    <a href="{{ path('app_eqp_int_edit', {'id': eqp_int.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_eqp_int_new') }}">Create new</a>
+{% endblock %}

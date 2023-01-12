@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gite index{% endblock %}
+
+{% block body %}
+    <h1>Gite index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Zipcode</th>
+                <th>Departement</th>
+                <th>Region</th>
+                <th>Surface</th>
+                <th>Rooms</th>
+                <th>Beds</th>
+                <th>AnimalAllowed</th>
+                <th>AnimalFee</th>
+                <th>GreenPrice</th>
+                <th>RedPrice</th>
+                <th>StartRed</th>
+                <th>EndRed</th>
+                <th>CreatedAt</th>
+                <th>UpdateAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for gite in gites %}
+            <tr>
+                <td>{{ gite.id }}</td>
+                <td>{{ gite.name }}</td>
+                <td>{{ gite.description }}</td>
+                <td>{{ gite.address }}</td>
+                <td>{{ gite.city }}</td>
+                <td>{{ gite.zipcode }}</td>
+                <td>{{ gite.departement }}</td>
+                <td>{{ gite.region }}</td>
+                <td>{{ gite.surface }}</td>
+                <td>{{ gite.rooms }}</td>
+                <td>{{ gite.beds }}</td>
+                <td>{{ gite.animalAllowed ? 'Yes' : 'No' }}</td>
+                <td>{{ gite.animalFee }}</td>
+                <td>{{ gite.greenPrice }}</td>
+                <td>{{ gite.redPrice }}</td>
+                <td>{{ gite.startRed ? gite.startRed|date('Y-m-d') : '' }}</td>
+                <td>{{ gite.endRed ? gite.endRed|date('Y-m-d') : '' }}</td>
+                <td>{{ gite.createdAt ? gite.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ gite.updateAt ? gite.updateAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_gite_show', {'id': gite.id}) }}">show</a>
+                    <a href="{{ path('app_gite_edit', {'id': gite.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="20">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_gite_new') }}">Create new</a>
+{% endblock %}

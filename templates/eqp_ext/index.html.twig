@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EqpExt index{% endblock %}
+
+{% block body %}
+    <h1>EqpExt index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for eqp_ext in eqp_exts %}
+            <tr>
+                <td>{{ eqp_ext.id }}</td>
+                <td>{{ eqp_ext.name }}</td>
+                <td>
+                    <a href="{{ path('app_eqp_ext_show', {'id': eqp_ext.id}) }}">show</a>
+                    <a href="{{ path('app_eqp_ext_edit', {'id': eqp_ext.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_eqp_ext_new') }}">Create new</a>
+{% endblock %}
