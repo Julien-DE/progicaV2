@@ -9,33 +9,31 @@
 	<table class="table table-striped">
 		<thead>
 			<tr>
-				<th>Id</th>
-				<th>Name</th>
+				<th>Nom du gîte</th>
 				<th>Description</th>
-				<th>Address</th>
-				<th>City</th>
-				<th>Zipcode</th>
+				<th>Adresse</th>
+				<th>Ville</th>
+				<th>Code Postal</th>
 				<th>Departement</th>
-				<th>Region</th>
+				<th>Région</th>
 				<th>Surface</th>
-				<th>Rooms</th>
-				<th>Beds</th>
-				<th>AnimalAllowed</th>
-				<th>AnimalFee</th>
-				<th>GreenPrice</th>
-				<th>RedPrice</th>
-				<th>StartRed</th>
-				<th>EndRed</th>
-				<th>CreatedAt</th>
-				<th>UpdateAt</th>
-				<th>actions</th>
+				<th>Nombre de pièces</th>
+				<th>Nombre de lits</th>
+				<th>Animaux authorisé ?</th>
+				<th>Cout pour les animaux</th>
+				<th>Prix basse saison</th>
+				<th>Prix haute saison</th>
+				<th>Début haute saison</th>
+				<th>Fin haute saison</th>
+				<th>Crée le</th>
+				<th>Modifié le</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for gite in gites %}
 				<tr>
-					<td>{{ gite.id }}</td>
-					<td>{{ gite.name }}</td>
+					<td>{{ gite.name  }}</td>
 					<td>{{ gite.description }}</td>
 					<td>{{ gite.address }}</td>
 					<td>{{ gite.city }}</td>
@@ -49,13 +47,15 @@
 					<td>{{ gite.animalFee }}</td>
 					<td>{{ gite.greenPrice }}</td>
 					<td>{{ gite.redPrice }}</td>
-					<td>{{ gite.startRed ? gite.startRed|date('Y-m-d') : '' }}</td>
-					<td>{{ gite.endRed ? gite.endRed|date('Y-m-d') : '' }}</td>
-					<td>{{ gite.createdAt ? gite.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ gite.updateAt ? gite.updateAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ gite.startRed ? gite.startRed|date('d M Y') : '' }}</td>
+					<td>{{ gite.endRed ? gite.endRed|date('d M Y') : '' }}</td>
+					<td>{{ gite.createdAt ? gite.createdAt|date('d M Y') : '' }}</td>
+					<td>{{ gite.updateAt ? gite.updateAt|date('d-m-Y H:i') : '' }}</td>
 					<td>
-						<a href="{{ path('app_gite_show', {'id': gite.id}) }}">show</a>
-						<a href="{{ path('app_gite_edit', {'id': gite.id}) }}">edit</a>
+						<a class="btn btn-primary mb-3 mx-2" href="{{ path('app_gite_show', {'id': gite.id}) }}">Détails</a>
+						<a class="btn btn-warning mb-3 mx-2" href="{{ path('app_gite_edit', {'id': gite.id}) }}">Modifier</a>
+
+						{% include "gite/_delete_form.html.twig" %}
 					</td>
 				</tr>
 			{% else %}

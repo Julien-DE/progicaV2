@@ -92,6 +92,7 @@ class GiteController extends AbstractController
     #[Route('/{id}', name: 'app_gite_delete', methods: ['POST'])]
     public function delete(Request $request, Gite $gite, GiteRepository $giteRepository): Response
     {
+        
         if ($this->isCsrfTokenValid('delete'.$gite->getId(), $request->request->get('_token'))) {
             $giteRepository->remove($gite, true);
         }
