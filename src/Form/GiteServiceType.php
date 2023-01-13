@@ -12,8 +12,9 @@ class GiteServiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('price')
             ->add('service')
+            ->add('price')
+            
             
         ;
     }
@@ -22,6 +23,7 @@ class GiteServiceType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => GiteService::class,
+            
         ]);
     }
 }

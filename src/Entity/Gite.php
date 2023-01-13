@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GiteRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Gite
 {
     #[ORM\Id]
@@ -303,11 +304,18 @@ class Gite
         return $this;
     }
 
+    // #[ORM\PrePersist]
+    // public function setCreatedAtValue(): void
+    // {
+    //     $this->createdAt = new \DateTimeImmutable();
+    // }
+
     public function getUpdateAt(): ?\DateTimeImmutable
     {
         return $this->updateAt;
     }
 
+    
     public function setUpdateAt(\DateTimeImmutable $updateAt): self
     {
         $this->updateAt = $updateAt;
@@ -429,4 +437,6 @@ class Gite
 
         return $this;
     }
+
+ 
 }

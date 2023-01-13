@@ -32,8 +32,10 @@ class GiteController extends AbstractController
         $gite = new Gite();
 
         $service = new GiteService();
+        
         $gite->addGiteService($service);
-
+        
+        
         $eqpExt = new GiteEqpExt();
         $gite->addGiteEqpExt($eqpExt);
 
@@ -44,6 +46,7 @@ class GiteController extends AbstractController
         $form = $this->createForm(GiteType::class, $gite);
         
         $form->handleRequest($request);
+        $form->remove('createdAt');
         
         if ($form->isSubmitted() && $form->isValid()) {
             
