@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\EqpExt;
 use App\Entity\EqpInt;
 use App\Entity\Gite;
+use App\Entity\GiteEqpExt;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -45,7 +46,7 @@ class GiteType extends AbstractType
                 
             ])
             ->add('giteEqpInts',CollectionType::class,[
-                'allow_add' => true,
+                'allow_add' => true,    
                 'entry_type'=> GiteEqpIntType::class,
             ])
         ;
