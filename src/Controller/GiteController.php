@@ -46,7 +46,6 @@ class GiteController extends AbstractController
         $form = $this->createForm(GiteType::class, $gite);
         
         $form->handleRequest($request);
-        $form->remove('createdAt');
         
         if ($form->isSubmitted() && $form->isValid()) {
             

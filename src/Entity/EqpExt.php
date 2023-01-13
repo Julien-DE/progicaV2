@@ -18,7 +18,7 @@ class EqpExt
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'eqpExt', targetEntity: GiteEqpExt::class,cascade:['persist'])]
+    #[ORM\OneToMany(mappedBy: 'eqpExt', targetEntity: GiteEqpExt::class, cascade: ['persist'])]
     private Collection $giteEqpExts;
 
     public function __construct()

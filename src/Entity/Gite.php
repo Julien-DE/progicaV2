@@ -71,20 +71,21 @@ class Gite
     #[ORM\Column]
     private ?\DateTimeImmutable $updateAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteService::class,cascade:['persist'])]
+    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteService::class, cascade: ['persist'])]
     private Collection $giteServices;
 
-    #[ORM\ManyToOne(inversedBy: 'gite')]
+    #[ORM\ManyToOne(inversedBy: 'gite', cascade: ['persist'])]
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'giteContact')]
+    #[ORM\ManyToOne(inversedBy: 'giteContact', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: true)]
     private ?User $contact = null;
 
-    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteEqpExt::class,cascade:['persist'])]
+    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteEqpExt::class, cascade: ['persist'])]
     private Collection $giteEqpExts;
 
-    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteEqpInt::class,cascade:['persist'])]
+    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteEqpInt::class, cascade: ['persist'])]
     private Collection $giteEqpInts;
 
     public function __construct()
@@ -304,11 +305,11 @@ class Gite
         return $this;
     }
 
-    // #[ORM\PrePersist]
-    // public function setCreatedAtValue(): void
-    // {
-    //     $this->createdAt = new \DateTimeImmutable();
-    // }
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getUpdateAt(): ?\DateTimeImmutable
     {
@@ -323,6 +324,11 @@ class Gite
         return $this;
     }
 
+    #[ORM\PostPersist]
+    public function setUpdateAtValue(): void
+    {
+        $this->updateAt = new \DateTimeImmutable();
+    }
     /**
      * @return Collection<int, GiteService>
      */

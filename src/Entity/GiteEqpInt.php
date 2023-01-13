@@ -13,10 +13,12 @@ class GiteEqpInt
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'giteEqpInts',cascade:['persist'])]
+    #[ORM\ManyToOne(inversedBy: 'giteEqpInts', cascade: ['persist'])]
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
     private ?Gite $gite = null;
 
-    #[ORM\ManyToOne(inversedBy: 'giteEqpInts',cascade:['persist'])]
+    #[ORM\ManyToOne(inversedBy: 'giteEqpInts', cascade: ['persist'])]
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
     private ?EqpInt $eqpInt = null;
 
     public function getId(): ?int

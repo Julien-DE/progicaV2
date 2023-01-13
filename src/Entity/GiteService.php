@@ -16,10 +16,12 @@ class GiteService
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'giteServices')]
+    #[ORM\ManyToOne(inversedBy: 'giteServices', cascade: ['persist'])]
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
     private ?Service $service = null;
 
-    #[ORM\ManyToOne(inversedBy: 'giteServices')]
+    #[ORM\ManyToOne(inversedBy: 'giteServices', cascade: ['persist'])]
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
     private ?Gite $gite = null;
 
     public function getId(): ?int

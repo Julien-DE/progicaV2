@@ -33,8 +33,6 @@ class GiteType extends AbstractType
             ->add('redPrice')
             ->add('startRed')
             ->add('endRed')
-            ->add('createdAt')
-            ->add('updateAt')
             ->add('giteServices',CollectionType::class,[
                 'allow_add' => true,
                 'entry_type'=> GiteServiceType::class,
