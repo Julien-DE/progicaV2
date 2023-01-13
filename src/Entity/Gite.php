@@ -309,6 +309,7 @@ class Gite
     public function setCreatedAtValue(): void
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->updateAt = new \DateTimeImmutable();
     }
 
     public function getUpdateAt(): ?\DateTimeImmutable
@@ -324,7 +325,7 @@ class Gite
         return $this;
     }
 
-    #[ORM\PostPersist]
+    #[ORM\PreUpdate]
     public function setUpdateAtValue(): void
     {
         $this->updateAt = new \DateTimeImmutable();
