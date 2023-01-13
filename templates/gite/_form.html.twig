@@ -1,4 +1,92 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+
+<div class="row">
+	<div class="col-4 align">
+		{{form_row(form.name, {'label': 'Nom du gîte'})}}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		{{form_row(form.description, {'label': 'Description du gîte'})}}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		{{form_row(form.address, {'label': 'Adresse du gîte'})}}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		{{form_row(form.city, {'label': 'Ville'})}}
+	</div>
+	<div class="col">
+		{{form_row(form.zipcode, {'label': 'Code Postale'})}}
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		{{form_row(form.departement, {'label': 'Département'})}}
+	</div>
+	<div class="col">
+		{{form_row(form.region, {'label': 'Région'})}}
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		{{form_row(form.surface, {'label': 'Surface du logement'})}}
+	</div>
+	<div class="col">
+		{{form_row(form.rooms, {'label': 'Nombre de pièces'})}}
+	</div>
+	<div class="col">
+		{{form_row(form.beds, {'label': 'Nombre de lits'})}}
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col">
+		{{form_row(form.animalAllowed, {'label': 'Animaux autorisés ?'})}}
+	</div>
+	<div class="col">
+		{{form_row(form.animalFee, {'label': 'Prix pour les animaux'})}}
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		{{form_row(form.greenPrice, {'label': 'Prix en saison basse'})}}
+	</div>
+	<div class="col">
+		{{form_row(form.redPrice, {'label': 'Prix en saison haute'})}}
+	</div>
+	<div class="col">
+		{{form_row(form.startRed, {'label': 'Date début de la haute saison'})}}
+	</div>
+	<div class="col">
+		{{form_row(form.endRed, {'label': 'Date fin de la haute saison'})}}
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		{{form_row(form.giteServices, {'label': 'Services compris avec le gîte'})}}
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		{{form_row(form.giteEqpExts, {'label': 'Equipements extérieur compris avec le gîte'})}}
+	</div>
+</div>
+<div class="row">
+	<div class="col">
+		{{form_row(form.giteEqpInts, {'label': 'Equipements interieur compris avec le gîte'})}}
+	</div>
+</div>
+
+
+<button class="btn btn-primary">{{ button_label|default('Enregistrer le gîte') }}</button>
 {{ form_end(form) }}

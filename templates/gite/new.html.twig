@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Gite{% endblock %}
+{% block title %}New Gite
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Gite</h1>
+	<h1>Create new Gite</h1>
 
-    {{ include('gite/_form.html.twig') }}
+	{{ include('gite/_form.html.twig') }}
 
-    <a href="{{ path('app_gite_index') }}">back to list</a>
+	<a href="{{ path('app_gite_index') }}">Retourner à la liste</a>
 {% endblock %}

@@ -38,7 +38,7 @@ class GiteType extends AbstractType
             ->add('giteServices',CollectionType::class,[
                 'allow_add' => true,
                 'entry_type'=> GiteServiceType::class,
-                
+                'label'=> false,
             ])
             ->add('giteEqpExts',CollectionType::class,[
                 'allow_add' => true,
@@ -48,7 +48,8 @@ class GiteType extends AbstractType
             ->add('giteEqpInts',CollectionType::class,[
                 'allow_add' => true,    
                 'entry_type'=> GiteEqpIntType::class,
-            ])
+                
+                ])
         ;
     }
 
