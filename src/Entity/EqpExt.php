@@ -18,12 +18,12 @@ class EqpExt
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToMany(targetEntity: Gite::class, inversedBy: 'eqpExts')]
-    private Collection $gite;
+    #[ORM\OneToMany(mappedBy: 'eqpExt', targetEntity: GiteEqpExt::class,cascade:['persist'])]
+    private Collection $giteEqpExts;
 
     public function __construct()
     {
-        $this->gite = new ArrayCollection();
+        $this->giteEqpExts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -44,25 +44,31 @@ class EqpExt
     }
 
     /**
-     * @return Collection<int, Gite>
+     * @return Collection<int, GiteEqpExt>
      */
-    public function getGite(): Collection
+    public function getGiteEqpExts(): Collection
     {
-        return $this->gite;
+        return $this->giteEqpExts;
     }
 
-    public function addGite(Gite $gite): self
+    public function addGiteEqpExt(GiteEqpExt $giteEqpExt): self
     {
-        if (!$this->gite->contains($gite)) {
-            $this->gite->add($gite);
+        if (!$this->giteEqpExts->contains($giteEqpExt)) {
+            $this->giteEqpExts->add($giteEqpExt);
+            $giteEqpExt->setEqpExt($this);
         }
 
         return $this;
     }
 
-    public function removeGite(Gite $gite): self
+    public function removeGiteEqpExt(GiteEqpExt $giteEqpExt): self
     {
-        $this->gite->removeElement($gite);
+        if ($this->giteEqpExts->removeElement($giteEqpExt)) {
+            // set the owning side to null (unless already changed)
+            if ($giteEqpExt->getEqpExt() === $this) {
+                $giteEqpExt->setEqpExt(null);
+            }
+        }
 
         return $this;
     }

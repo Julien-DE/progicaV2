@@ -2,9 +2,14 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Gite;
+use App\Entity\GiteEqpExt;
+use App\Entity\GiteEqpInt;
+use App\Entity\GiteService;
 use App\Form\GiteType;
 use App\Repository\GiteRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,14 +27,30 @@ class GiteController extends AbstractController
     }
 
     #[Route('/new', name: 'app_gite_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, GiteRepository $giteRepository): Response
+    public function new(Request $request, GiteRepository $giteRepository,EntityManagerInterface $entityManager):Response
     {
         $gite = new Gite();
-        $form = $this->createForm(GiteType::class, $gite);
-        $form->handleRequest($request);
 
+        $service = new GiteService();
+        $gite->addGiteService($service);
+
+        $eqpExt = new GiteEqpExt();
+        $gite->addGiteEqpExt($eqpExt);
+
+        $eqpInt = new GiteEqpInt();
+        $gite->addGiteEqpInt($eqpInt);
+    
+
+        $form = $this->createForm(GiteType::class, $gite);
+        
+        $form->handleRequest($request);
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            
+        
             $giteRepository->save($gite, true);
+            
+            
 
             return $this->redirectToRoute('app_gite_index', [], Response::HTTP_SEE_OTHER);
         }

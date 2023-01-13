@@ -70,27 +70,28 @@ class Gite
     #[ORM\Column]
     private ?\DateTimeImmutable $updateAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteService::class)]
+    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteService::class,cascade:['persist'])]
     private Collection $giteServices;
-
-    #[ORM\ManyToMany(targetEntity: EqpInt::class, mappedBy: 'gite')]
-    private Collection $eqpInts;
-
-    #[ORM\ManyToMany(targetEntity: EqpExt::class, mappedBy: 'gite')]
-    private Collection $eqpExts;
 
     #[ORM\ManyToOne(inversedBy: 'gite')]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'giteContact')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $contact = null;
+
+    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteEqpExt::class,cascade:['persist'])]
+    private Collection $giteEqpExts;
+
+    #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteEqpInt::class,cascade:['persist'])]
+    private Collection $giteEqpInts;
 
     public function __construct()
     {
         $this->giteServices = new ArrayCollection();
-        $this->eqpInts = new ArrayCollection();
-        $this->eqpExts = new ArrayCollection();
+        $this->giteEqpExts = new ArrayCollection();
+        $this->giteEqpInts = new ArrayCollection();
+    
     }
 
     public function getId(): ?int
@@ -344,59 +345,6 @@ class Gite
         return $this;
     }
 
-    /**
-     * @return Collection<int, EqpInt>
-     */
-    public function getEqpInts(): Collection
-    {
-        return $this->eqpInts;
-    }
-
-    public function addEqpInt(EqpInt $eqpInt): self
-    {
-        if (!$this->eqpInts->contains($eqpInt)) {
-            $this->eqpInts->add($eqpInt);
-            $eqpInt->addGite($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEqpInt(EqpInt $eqpInt): self
-    {
-        if ($this->eqpInts->removeElement($eqpInt)) {
-            $eqpInt->removeGite($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, EqpExt>
-     */
-    public function getEqpExts(): Collection
-    {
-        return $this->eqpExts;
-    }
-
-    public function addEqpExt(EqpExt $eqpExt): self
-    {
-        if (!$this->eqpExts->contains($eqpExt)) {
-            $this->eqpExts->add($eqpExt);
-            $eqpExt->addGite($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEqpExt(EqpExt $eqpExt): self
-    {
-        if ($this->eqpExts->removeElement($eqpExt)) {
-            $eqpExt->removeGite($this);
-        }
-
-        return $this;
-    }
 
     public function getUser(): ?User
     {
@@ -418,6 +366,66 @@ class Gite
     public function setContact(?User $contact): self
     {
         $this->contact = $contact;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GiteEqpExt>
+     */
+    public function getGiteEqpExts(): Collection
+    {
+        return $this->giteEqpExts;
+    }
+
+    public function addGiteEqpExt(GiteEqpExt $giteEqpExt): self
+    {
+        if (!$this->giteEqpExts->contains($giteEqpExt)) {
+            $this->giteEqpExts->add($giteEqpExt);
+            $giteEqpExt->setGite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGiteEqpExt(GiteEqpExt $giteEqpExt): self
+    {
+        if ($this->giteEqpExts->removeElement($giteEqpExt)) {
+            // set the owning side to null (unless already changed)
+            if ($giteEqpExt->getGite() === $this) {
+                $giteEqpExt->setGite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GiteEqpInt>
+     */
+    public function getGiteEqpInts(): Collection
+    {
+        return $this->giteEqpInts;
+    }
+
+    public function addGiteEqpInt(GiteEqpInt $giteEqpInt): self
+    {
+        if (!$this->giteEqpInts->contains($giteEqpInt)) {
+            $this->giteEqpInts->add($giteEqpInt);
+            $giteEqpInt->setGite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGiteEqpInt(GiteEqpInt $giteEqpInt): self
+    {
+        if ($this->giteEqpInts->removeElement($giteEqpInt)) {
+            // set the owning side to null (unless already changed)
+            if ($giteEqpInt->getGite() === $this) {
+                $giteEqpInt->setGite(null);
+            }
+        }
 
         return $this;
     }

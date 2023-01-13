@@ -13,7 +13,6 @@ class EqpExtType extends AbstractType
     {
         $builder
             ->add('name')
-            
         ;
     }
 
