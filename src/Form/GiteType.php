@@ -9,8 +9,10 @@ use App\Entity\GiteEqpExt;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class GiteType extends AbstractType
 {
@@ -48,6 +50,21 @@ class GiteType extends AbstractType
                 'entry_type'=> GiteEqpIntType::class,
                 
                 ])
+            ->add('photoGite',FileType::class,[
+                'label' =>'Photo du gîte',
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '4096k',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/jpg',
+                        ],
+                        'mimeTypesMessage' => 'Merci de mettre une image valide',
+                    ])
+                ],
+            ])
         ;
     }
 

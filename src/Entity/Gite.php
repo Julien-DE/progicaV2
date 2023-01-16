@@ -88,6 +88,9 @@ class Gite
     #[ORM\OneToMany(mappedBy: 'gite', targetEntity: GiteEqpInt::class, cascade: ['persist'])]
     private Collection $giteEqpInts;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $photoGite = null;
+
     public function __construct()
     {
         $this->giteServices = new ArrayCollection();
@@ -441,6 +444,18 @@ class Gite
                 $giteEqpInt->setGite(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPhotoGite(): ?string
+    {
+        return $this->photoGite;
+    }
+
+    public function setPhotoGite(?string $photoGite): self
+    {
+        $this->photoGite = $photoGite;
 
         return $this;
     }
